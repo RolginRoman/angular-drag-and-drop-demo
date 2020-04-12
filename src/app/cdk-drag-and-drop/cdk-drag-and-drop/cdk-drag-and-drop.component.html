@@ -1,0 +1,110 @@
+<!--<div class="container">-->
+<!--    <h2>To do</h2>-->
+
+<!--    <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="todo"-->
+<!--         [cdkDropListConnectedTo]="doneList" class="list" (cdkDropListDropped)="drop($event)">-->
+<!--        <div class="list-item" *ngFor="let item of todo" cdkDrag>{{item}}</div>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--<div class="container">-->
+<!--    <h2>Done</h2>-->
+
+<!--    <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="done"-->
+<!--         [cdkDropListConnectedTo]="todoList" class="list" (cdkDropListDropped)="drop($event)">-->
+<!--        <div class="list-item" *ngFor="let item of done" cdkDrag>{{item}}</div>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--<div cdkDropListGroup style="display: inline-block">-->
+<!--    <h2>Static template</h2>-->
+<!--    <div class="container">-->
+<!--        <h2>Todo</h2>-->
+<!--        <div cdkDropList [cdkDropListData]="todo" class="list" (cdkDropListDropped)="drop($event)">-->
+<!--            <div class="list-item" *ngFor="let item of todo" cdkDrag>{{item}}</div>-->
+<!--            <app-test-injector source="static"></app-test-injector>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="container">-->
+<!--        <h2>Done</h2>-->
+<!--        <div cdkDropList [cdkDropListData]="done" class="list" (cdkDropListDropped)="drop($event)">-->
+<!--            <div class="list-item" *ngFor="let item of done" cdkDrag>-->
+<!--                {{item}}-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--<div cdkDropListGroup style="display: inline-block">-->
+<!--    <h2>Dynamic template with outlets</h2>-->
+<!--    <ng-container-->
+<!--        *ngTemplateOutlet="listTemplate; context: {items: todo, name: 'Todo'}"></ng-container>-->
+<!--    <ng-container-->
+<!--        *ngTemplateOutlet="listTemplate; context: {items: done, name: 'Done'}"></ng-container>-->
+<!--</div>-->
+
+<!--<ng-template #listTemplate let-items="items" let-name="name">-->
+<!--    <div class="container">-->
+<!--        <h2>{{name}}</h2>-->
+<!--        <div cdkDropList appConnectLists #connector="connector" [cdkDropListConnectedTo]="connector.connected | async"-->
+<!--             [cdkDropListData]="items" class="list" (cdkDropListDropped)="drop($event)">-->
+<!--            <div class="list-item" *ngFor="let item of items" cdkDrag>-->
+<!--                {{item}}-->
+<!--                <app-test-injector source="dynamic" [connector]="connector"-->
+<!--                                   [connectedLists]="connector.connected | async"></app-test-injector>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    &lt;!&ndash;    <app-test-injector></app-test-injector>&ndash;&gt;-->
+<!--</ng-template>-->
+
+
+<div class="ch-container">
+    <ng-container *ngFor="let item of items; trackBy: trackBy">
+        <ng-container *ngTemplateOutlet="item.type==='folder' ? folderTemplate : assetTemplate; context: {item: item}">
+        </ng-container>
+
+        <!--        <div class="item-container" cdkDropList appConnectLists #connector="connector"-->
+        <!--             [cdkDropListConnectedTo]="connector.connected | async" [cdkDropListData]="item" [cdkDropListEnterPredicate]="enter"-->
+        <!--             (cdkDropListDropped)="dropList($event)">-->
+        <!--            <div class="item" cdkDrag [cdkDragData]="item"-->
+        <!--                 [attr.data-id]="item.id" [attr.data-type]="item.type" (cdkDragDropped)="dragDrop($event)">-->
+        <!--                {{item.type}}-{{item.name}}-->
+        <!--&lt;!&ndash;                <div *cdkDragPreview> preview </div>&ndash;&gt;-->
+        <!--            </div>-->
+        <!--        </div>-->
+    </ng-container>
+</div>
+
+<ng-template #assetTemplate let-item="item">
+    <div class="_asset" [attr.idx]="item.type + item.id" cdkDropList appConnectLists #connector="connector"
+         [cdkDropListEnterPredicate]="assetEnterPredicate"
+         [cdkDropListConnectedTo]="connector.connected | async">
+        <div class="item" cdkDrag
+             [cdkDragData]="item"
+             (cdkDragEntered)="assetDragEntered($event)"
+             [attr.data-id]="item.id" [attr.data-type]="item.type" (cdkDragDropped)="dragDrop($event)">
+            {{item.type}}-{{item.name}}
+            <img alt='image' src="assets/hor.webp"/>
+            <div *cdkDragPreview> preview asset {{item.type}}-{{item.name}} </div>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #folderTemplate let-item="item">
+    <div class="item-container _folder" [attr.idx]="item.type + item.id" cdkDropList appConnectLists
+         #connector="connector"
+         [cdkDropListEnterPredicate]="folderEnterPredicate"
+         [cdkDropListConnectedTo]="connector.connected | async"
+         [cdkDropListData]="item"
+         (cdkDropListEntered)="enterList($event)"
+         (cdkDropListDropped)="dropList($event)">
+        <div class="item" cdkDrag
+             [cdkDragData]="item"
+             (cdkDragEntered)="folderDragEntered($event)"
+             [attr.data-id]="item.id" [attr.data-type]="item.type" (cdkDragDropped)="dragDrop($event)">
+            {{item.type}}-{{item.name}}
+            <div *cdkDragPreview> preview folder {{item.type}}-{{item.name}}</div>
+        </div>
+    </div>
+</ng-template>

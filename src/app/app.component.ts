@@ -1,10 +1,20 @@
-import { Component } from '@angular/core';
+import {Component, ViewEncapsulation} from '@angular/core';
+import {DragulaService} from 'ng2-dragula';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.css'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class AppComponent {
-  title = 'ng-dnd-example';
+    title = 'ng-dnd-example';
+
+    constructor(private dragula: DragulaService) {
+        dragula.createGroup('DRAGULA_FACTS', {
+            copy: true,
+        });
+        dragula.drag().subscribe(console.log);
+        dragula.dragend().subscribe(console.log);
+    }
 }

@@ -1,0 +1,35 @@
+<div class="ch-container">
+    <ng-container *ngFor="let item of items; trackBy: trackBy">
+        <ng-container *ngTemplateOutlet="item.type==='folder' ? folderTemplate : assetTemplate; context: {item: item}">
+        </ng-container>
+    </ng-container>
+</div>
+
+<ng-template #assetTemplate let-item="item">
+    <div class="_asset" [attr.idx]="item.type + item.id"
+         [dndDraggable]="item"
+
+    >
+        <div class="item"
+             [attr.data-id]="item.id" [attr.data-type]="item.type">
+            {{item.type}}-{{item.name}}
+            <img draggable='false' alt='image' src="assets/hor.webp"/>
+        </div>
+
+        <app-ngx-drag-and-drop-drag-image></app-ngx-drag-and-drop-drag-image>
+    </div>
+</ng-template>
+
+<ng-template #folderTemplate let-item="item">
+    <div class="item-container _folder" [attr.idx]="item.type + item.id"
+         dndDropzone
+         [dndDraggable]="item"
+         (dndDrop)="onDrop(item, $event)"
+    >
+        <div class="item"
+             [attr.data-id]="item.id" [attr.data-type]="item.type">
+            {{item.type}}-{{item.name}}
+            <img draggable='false' alt="folder" src="assets/folder.jpg"/>
+        </div>
+    </div>
+</ng-template>
