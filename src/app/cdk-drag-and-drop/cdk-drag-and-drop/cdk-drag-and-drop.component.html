@@ -77,7 +77,7 @@
 </div>
 
 <ng-template #assetTemplate let-item="item">
-    <div class="_asset" [attr.idx]="item.type + item.id"
+    <div class="item-container _asset" [attr.idx]="item.type + item.id"
          cdkDropList
          appConnectLists #connector="connector"
          [cdkDropListConnectedTo]="connector.connected | async"
@@ -96,6 +96,7 @@
 
 <ng-template #folderTemplate let-item="item">
     <div class="item-container _folder" [attr.idx]="item.type + item.id"
+         (drop)="onNativeDrop($event)"
          cdkDropList
          appConnectLists #connector="connector"
          [cdkDropListConnectedTo]="connector.connected | async"

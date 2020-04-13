@@ -26,7 +26,7 @@ export class CdkDragAndDropComponent {
 
     constructor(private connectManagerService: ConnectManagerService) {
         for (let i = 0; i < 2; i++) {
-            const type = Math.random() < 0.3 ? 'folder' : 'asset';
+            const type = Math.random() < 0.5 ? 'folder' : 'asset';
             this.items.push({
                 id: i.toString(),
                 name: type + i,
@@ -84,5 +84,9 @@ export class CdkDragAndDropComponent {
 
     folderEnterPredicate(drag: CdkDrag, drop: CdkDropList): boolean {
         return true;
+    }
+
+    onNativeDrop(event: DragEvent) {
+        console.log('Native drop from cdk drag', event);
     }
 }
