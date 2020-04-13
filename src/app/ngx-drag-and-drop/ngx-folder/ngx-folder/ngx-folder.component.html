@@ -1,0 +1,11 @@
+<div class="item-container _folder" [attr.idx]="item.type + item.id"
+     dndDropzone
+     [dndDraggable]="item"
+     (dndDrop)="onDrop(item, $event)"
+>
+    <div class="item"
+         [attr.data-id]="item.id" [attr.data-type]="item.type">
+        {{item.type}}-{{item.name}}
+        <img draggable='false' alt="folder" src="assets/folder.jpg"/>
+    </div>
+</div>

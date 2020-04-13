@@ -25,7 +25,7 @@ export class CdkDragAndDropComponent {
     public items: ViewItem[] = [];
 
     constructor(private connectManagerService: ConnectManagerService) {
-        for (let i = 0; i < 10; i++) {
+        for (let i = 0; i < 2; i++) {
             const type = Math.random() < 0.3 ? 'folder' : 'asset';
             this.items.push({
                 id: i.toString(),
@@ -79,12 +79,10 @@ export class CdkDragAndDropComponent {
     }
 
     assetEnterPredicate(drag: CdkDrag, drop: CdkDropList): boolean {
-        // console.log('asset enter predicate checked');
-        return true;
+        return false;
     }
 
     folderEnterPredicate(drag: CdkDrag, drop: CdkDropList): boolean {
-        // console.log('folder enter predicate checked');
         return true;
     }
 }

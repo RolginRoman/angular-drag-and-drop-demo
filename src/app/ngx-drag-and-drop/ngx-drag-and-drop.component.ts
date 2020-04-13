@@ -1,17 +1,12 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
-import {DndDropEvent} from 'ngx-drag-drop';
-
-interface ViewItem {
-    readonly id: string;
-    readonly name: string;
-    readonly type: 'asset' | 'folder';
-}
+import {ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {ViewItem} from './model/view-item.model';
 
 @Component({
     selector: 'app-ngx-drag-and-drop',
     templateUrl: './ngx-drag-and-drop.component.html',
     styleUrls: ['./ngx-drag-and-drop.component.css'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
 })
 export class NgxDragAndDropComponent implements OnInit {
 
@@ -33,9 +28,5 @@ export class NgxDragAndDropComponent implements OnInit {
     }
 
     ngOnInit(): void {
-    }
-
-    onDrop(item: ViewItem, event: DndDropEvent) {
-        console.log('drop event. Item:', event.data, 'to', item);
     }
 }

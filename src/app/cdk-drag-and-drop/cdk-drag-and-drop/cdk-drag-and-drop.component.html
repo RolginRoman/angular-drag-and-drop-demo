@@ -77,9 +77,12 @@
 </div>
 
 <ng-template #assetTemplate let-item="item">
-    <div class="_asset" [attr.idx]="item.type + item.id" cdkDropList appConnectLists #connector="connector"
+    <div class="_asset" [attr.idx]="item.type + item.id"
+         cdkDropList
+         appConnectLists #connector="connector"
+         [cdkDropListConnectedTo]="connector.connected | async"
          [cdkDropListEnterPredicate]="assetEnterPredicate"
-         [cdkDropListConnectedTo]="connector.connected | async">
+         cdkDropListSortingDisabled="true">
         <div class="item" cdkDrag
              [cdkDragData]="item"
              (cdkDragEntered)="assetDragEntered($event)"
@@ -92,11 +95,13 @@
 </ng-template>
 
 <ng-template #folderTemplate let-item="item">
-    <div class="item-container _folder" [attr.idx]="item.type + item.id" cdkDropList appConnectLists
-         #connector="connector"
-         [cdkDropListEnterPredicate]="folderEnterPredicate"
+    <div class="item-container _folder" [attr.idx]="item.type + item.id"
+         cdkDropList
+         appConnectLists #connector="connector"
          [cdkDropListConnectedTo]="connector.connected | async"
+         [cdkDropListEnterPredicate]="folderEnterPredicate"
          [cdkDropListData]="item"
+         cdkDropListSortingDisabled="true"
          (cdkDropListEntered)="enterList($event)"
          (cdkDropListDropped)="dropList($event)">
         <div class="item" cdkDrag

@@ -86,7 +86,7 @@ img {
 }
 
 .cdk-drag-dragging {
-    display: block !important;
+    /*display: block !important;*/
 
     outline: 1px solid #05ff00;
     background-color: rgba(0, 128, 0, 0.47);
@@ -106,10 +106,10 @@ img {
     outline: 2px #000000 dashed;
 }
 
-.cdk-drag-placeholder {
-    width: 0;
-    height: 0;
-    visibility: hidden;
-    opacity: 0;
-    display: none;
-}
+/*.cdk-drag-placeholder {*/
+/*    width: 0;*/
+/*    height: 0;*/
+/*    visibility: hidden;*/
+/*    opacity: 0;*/
+/*    display: none;*/
+/*}*/

@@ -1,0 +1,9 @@
+.dnd {
+    display: none;
+    position: absolute;
+    top: -1000px;
+}
+
+.dnd.dndDragging {
+    display: block;
+}

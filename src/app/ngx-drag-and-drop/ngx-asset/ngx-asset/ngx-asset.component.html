@@ -1,0 +1,12 @@
+<div class="_asset" [attr.idx]="item.type + item.id"
+     [dndDraggable]="item"
+     [dndDragImageOffsetFunction]="dndOffsetFunction"
+>
+    <div class="item"
+         [attr.data-id]="item.id" [attr.data-type]="item.type">
+        {{item.type}}-{{item.name}}
+        <img draggable='false' alt='image' src="assets/hor.webp"/>
+    </div>
+
+    <app-ngx-drag-and-drop-drag-image></app-ngx-drag-and-drop-drag-image>
+</div>

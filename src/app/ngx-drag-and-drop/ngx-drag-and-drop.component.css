@@ -1,7 +1,7 @@
 
 .ch-container {
     display: flex;
-    width: 100vw;
+    width: calc(100vw - 300px);
     flex-wrap: wrap;
 }
 
