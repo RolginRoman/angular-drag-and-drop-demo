@@ -9,6 +9,7 @@ import {DragulaService} from 'ng2-dragula';
 })
 export class AppComponent {
     title = 'ng-dnd-example';
+    navLinks: any = [{path: 'cdk', label: 'Cdk'}, {path: 'ngx', label: 'Ngx'}];
 
     constructor(private dragula: DragulaService) {
         dragula.createGroup('DRAGULA_FACTS', {

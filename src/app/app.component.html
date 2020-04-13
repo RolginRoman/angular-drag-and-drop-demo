@@ -1,5 +1,15 @@
 <!--<app-sample></app-sample>-->
+<nav mat-tab-nav-bar>
+    <a mat-tab-link
+       *ngFor="let link of navLinks"
+       [routerLink]="link.path"
+       routerLinkActive #rla="routerLinkActive"
+       [active]="rla.isActive">
+        {{link.label}}
+    </a>
+</nav>
 
-<app-cdk-drag-and-drop></app-cdk-drag-and-drop>
+<router-outlet></router-outlet>
+<!--<app-cdk-drag-and-drop></app-cdk-drag-and-drop>-->
 
 <!--<app-ngx-drag-and-drop></app-ngx-drag-and-drop>-->
